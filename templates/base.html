@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ELSnow shop</title>
+</head>
+<body>
+
+<a href="{%  url 'index' %}">
+    <h1>ELSnow shop</h1>
+</a>
+<!-- on veut afficher lien que si utilisateur n'est pas connecté-->
+{% if user.is_authenticated %}
+    {{ user.username }}
+    <a href = "{% url 'logout' %}">Logout</a>
+{% else %}
+    <a href="{%url 'login'%}">Connection</a>
+    <a href="{%url 'signup'%}">Register</a>
+{% endif %}
+
+{% if user.cart %}
+<p>
+    <a href="{% url 'cart' %}">See cart ({{ user.cart.orders.count }})</a> <!--on recuperer les orders de l'utilisateur avec le count-->
+</p>
+{% endif %}
+
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>
